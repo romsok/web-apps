@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context path="/para" docBase="para" debug="5" reloadable="true" crossContext="true">
+
+<Resource name="jdbc/para" auth="Container" type="javax.sql.DataSource"
+               maxActive="100" maxIdle="30" maxWait="10000"
+               username="para" password="para" driverClassName="com.mysql.jdbc.Driver"
+               url="jdbc:mysql://127.0.0.1:3306/paranormal"/>
+</Context>
+

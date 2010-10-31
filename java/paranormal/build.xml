@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project default="build" basedir="." >
+
+	<property name="web.inf"  location="para/WEB-INF"/>
+	<property name="classes"  location="${web.inf}/classes"/>
+	<property name="conf"  location="conf"/>
+	<property name="lib"  location="${web.inf}/lib"/>
+	<property name="src"  location="src"/>
+
+	<target name="build" depends="clean, compile, copy-log4j, make-war" >
+		<echo>Build complete</echo>
+	</target>
+	
+	<target name="clean">
+		<delete dir="${classes}" />
+		<delete file="${war.dir}/para.war"/>
+	</target>
+	
+	<target name="copy-log4j">
+		<copy todir="${classes}">
+    		<fileset dir="${conf}" excludes="**/log4j.properties"/>
+  		</copy>
+	</target>
+	
+	<target name="compile">
+		<mkdir dir="${classes}"/>
+		<javac srcdir="${src}"
+         destdir="${classes}"
+         classpathref="compile.path"
+         debug="on"
+         source="1.5"
+  		/>
+	</target>
+	
+	<target name="make-war">
+		<war destfile="para.war" webxml="${web.inf}/web.xml">
+			<fileset dir="para"/>
+		  	<webinf dir="${web.inf}" />
+		</war>
+	</target>
+	
+	<path id="compile.path">
+		<fileset dir="${web.inf}" includes="*.jar" />
+	</path>
+
+</project>
